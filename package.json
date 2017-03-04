@@ -1,0 +1,41 @@
+{
+  "name": "reasy-js",
+  "version": "0.0.1",
+  "description": "To help your api layer rest easy",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm test",
+    "start": "node node_modules/.bin/webpack-dev-server --hot --inline"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dmifsud/ReasyJs.git"
+  },
+  "keywords": [
+    "rest",
+    "api",
+    "AngularJs",
+    "TypeScript",
+    "JavaScript"
+  ],
+  "author": "David Mifsud",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dmifsud/ReasyJs/issues"
+  },
+  "homepage": "https://github.com/dmifsud/ReasyJs#readme",
+  "dependencies": {
+    "@types/angular": "^1.6.7",
+    "angular": "^1.6.2"
+  },
+  "devDependencies": {
+    "file-loader": "^0.10.1",
+    "html-webpack-plugin": "^2.28.0",
+    "ts-loader": "^2.0.1",
+    "tslint": "^4.5.1",
+    "tslint-loader": "^3.4.3",
+    "typescript": "^2.2.1",
+    "webpack": "^2.2.1",
+    "webpack-dev-server": "^2.4.1"
+  }
+}
