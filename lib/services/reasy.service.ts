@@ -2,9 +2,9 @@ import { IReasy, IReasyItem } from '../interfaces/reasy.interface';
 import * as ng from 'angular';
 import { ReasyJs, ReasyJsModuleName } from '../ng-module/reasy.module';
 
+
 export function BaseUrl(url: string) {
     return function <TFunction extends Function>(Target: TFunction): TFunction {
-        console.log('setting base url', url);
         
         Target.prototype.getBaseUrl = function() {
             let parent,
@@ -48,25 +48,25 @@ export function child(child: IReasyChild) {
 export class ReasyItem<T> implements IReasyItem<T> {
 
     constructor(private id, private url: string, private $q: ng.IQService) { }
+
+    protected get baseUrl(): string {
+        return this.url + this.id;
+    }
     
     get(params?: Object): ng.IPromise<T> {
-        console.group('[GET]');
-        console.log(this.url+this.id + ' ' + JSON.stringify(params || {}));
+        console.log(this.baseUrl + ' ' + JSON.stringify(params || {}));
         return this.$q.resolve(<T><any>{one: 'item'});
     }
     put(params: Object): ng.IPromise<T> {
-        console.group('[PUT]');
-        console.log(this.url+this.id + ' ' + JSON.stringify(params || {}));
+        console.log(this.baseUrl + ' ' + JSON.stringify(params || {}));
         return this.$q.resolve({});
     }
     delete(params?: Object): ng.IPromise<T> {
-        console.group('[DELETE]');
-        console.log(this.url+this.id + ' ' + JSON.stringify(params || {}));
+        console.log(this.baseUrl + ' ' + JSON.stringify(params || {}));
         return this.$q.resolve({});
     }
     patch(params: Object): ng.IPromise<T> {
-        console.group('[PATCH]');
-        console.log(this.url+this.id + ' ' + JSON.stringify(params || {}));
+        console.log(this.baseUrl + ' ' + JSON.stringify(params || {}));
         return this.$q.resolve({});
     }
 }

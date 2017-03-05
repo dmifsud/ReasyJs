@@ -1,44 +1,33 @@
 import * as ng from 'angular';
-import { HomeReasyService, RoomReasyService } from '../api/api.service';
+import { HomeReasyService } from '../api/home/home.reasy.service';
+import { RoomReasyService } from '../api/room/room.reasy.service';
+import { ApplianceReasyService } from '../api/appliances/appliance.reasy.service';
 
 class HomeComponentCtrl {
     text: string;
     constructor(private homeReasyService: HomeReasyService,
-                private roomReasyService: RoomReasyService) { }
+                private roomReasyService: RoomReasyService,
+                private applianceReasyService: ApplianceReasyService) { }
 
     $onInit() {
         this.text = 'Check your logs';
-        //WORKING
+
 
         this.homeReasyService.id(21).get({optional: 'param'})
-            .then(result => {
-                console.log(result);
-                console.groupEnd();
-            })
             .then(() => {
-                this.homeReasyService.get({other: 'options'})
-                    .then(results => {
-                        console.log(results);
-                        console.groupEnd();
-                    });
+                this.homeReasyService.get({other: 'options'});
             })
             .then(() => {
                 this.homeReasyService.roomReasyService.id('{roomId}')
-                    .get({room: 'is in home'})
-                    .then(room => {
-                        console.log('rooms', room);
-                        console.groupEnd();
-                    });
+                    .get({room: 'is in home'});
             })
             .then(() => {
-                // WORKING
                 this.homeReasyService.id(3).roomReasyService.get();
+                this.roomReasyService.id(32).get();
             });
-
-
         
-
-        
+            // Awesome scenario to GET /home/3/room/34/appliances
+            this.homeReasyService.id(3).roomReasyService.id(34).applianceReasyService.get({appliances: 'params'});
     }
 }
 
