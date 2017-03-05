@@ -1,7 +1,6 @@
-import { IReasy, IReasyItem } from '../interfaces/reasy.interface';
 import * as ng from 'angular';
 import { ReasyJs, ReasyJsModuleName } from '../ng-module/reasy.module';
-
+import { ReasyTs } from '../index';
 
 export function BaseUrl(url: string) {
     return function <TFunction extends Function>(Target: TFunction): TFunction {
@@ -23,10 +22,10 @@ export function BaseUrl(url: string) {
 
 interface IReasyChild {
     provide: string;
-    use: { new(): IReasy };
+    use: { new(): ReasyTs.IReasy };
 }
 export function child(child: IReasyChild) {
-    return function <T extends IReasy>(Target: T, propertyName: string) {
+    return function <T extends ReasyTs.IReasy>(Target: T, propertyName: string) {
         
         const reasyChild = new child.use();
         reasyChild['getParent'] = function() {
@@ -45,7 +44,7 @@ export function child(child: IReasyChild) {
 }
 
 
-export class ReasyItem<T> implements IReasyItem<T> {
+export class ReasyItem<T> implements ReasyTs.IReasyItem<T> {
 
     constructor(private id, private url: string, private $q: ng.IQService) { }
 
@@ -72,7 +71,7 @@ export class ReasyItem<T> implements IReasyItem<T> {
 }
 
 
-export abstract class Reasy<T, R extends ReasyItem<T>> implements IReasy {
+export abstract class Reasy<T, R extends ReasyItem<T>> implements ReasyTs.IReasy {
     // @Injectable
     private $q: ng.IQService;
     protected __children: Array<IReasyChild>;

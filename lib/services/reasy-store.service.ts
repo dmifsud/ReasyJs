@@ -1,25 +1,17 @@
 import * as ng from 'angular';
 import { ReasyJsModuleName } from '../ng-module/reasy.module';
+import { ReasyTs } from '../';
 
-interface NgReasyProvider {
-    provide: string;
-    use: any;
-}
 
-export interface IReasyStore {
-    addResource(resource: NgReasyProvider);
-    addResources(resources: Array<NgReasyProvider>);
-}
-
-export class ReasyStoreProvider implements ng.IServiceProvider, IReasyStore {
+export class ReasyStoreProvider implements ng.IServiceProvider, ReasyTs.IReasyStore {
     public static $inject: string[] = ['$provide'];
 
     constructor(private $provide) {}
-        addResource(resource: NgReasyProvider) {
+        addResource(resource: ReasyTs.IReasyProvider) {
             this.$provide.service(resource.provide, resource.use);
         }
 
-        addResources(resources: Array<NgReasyProvider>) {
+        addResources(resources: Array<ReasyTs.IReasyProvider>) {
             ng.forEach(resources, resource => {
                 this.addResource(resource);
             });
