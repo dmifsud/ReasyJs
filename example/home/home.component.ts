@@ -2,6 +2,8 @@ import * as ng from 'angular';
 import { HomeReasyService } from '../api/home/home.reasy.service';
 import { RoomReasyService } from '../api/room/room.reasy.service';
 import { ApplianceReasyService } from '../api/appliances/appliance.reasy.service';
+import { ReasyProvide } from '../../lib/ng-module/reasy.module';
+
 
 class HomeComponentCtrl {
     text: string;
@@ -28,6 +30,7 @@ class HomeComponentCtrl {
         
             // Awesome scenario to GET /home/3/room/34/appliances
             this.homeReasyService.id(3).roomReasyService.id(34).applianceReasyService.get({appliances: 'params'});
+
     }
 }
 
