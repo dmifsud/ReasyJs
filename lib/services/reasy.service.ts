@@ -45,7 +45,7 @@ export function child(child: IReasyChild) {
 
 export class ReasyItem<T> implements ReasyTs.IReasyItem<T> {
 
-    constructor(private id, private url: string, private $q: ng.IQService) { }
+    constructor(private id, private url: string, private $http: ng.IHttpService) { }
 
     protected get baseUrl(): string {
         return this.url + this.id;
@@ -53,33 +53,33 @@ export class ReasyItem<T> implements ReasyTs.IReasyItem<T> {
     
     get(params?: Object): ng.IPromise<T> {
         console.log(this.baseUrl + ' ' + JSON.stringify(params || {}));
-        return this.$q.resolve(<T><any>{one: 'item'});
+        return this.$http.get(this.baseUrl, params);
     }
     put(params: Object): ng.IPromise<T> {
         console.log(this.baseUrl + ' ' + JSON.stringify(params || {}));
-        return this.$q.resolve({});
+        return this.$http.put(this.baseUrl, params);
     }
     delete(params?: Object): ng.IPromise<T> {
         console.log(this.baseUrl + ' ' + JSON.stringify(params || {}));
-        return this.$q.resolve({});
+        return this.$http.delete(this.baseUrl, params);
     }
     patch(params: Object): ng.IPromise<T> {
         console.log(this.baseUrl + ' ' + JSON.stringify(params || {}));
-        return this.$q.resolve({});
+        return this.$http.patch(this.baseUrl, params);
     }
 }
 
 
-export abstract class Reasy<T, R extends ReasyItem<T>> implements ReasyTs.IReasy {
+export abstract class ReasyService<T, R extends ReasyItem<T>> implements ReasyTs.IReasy {
     // @Injectable
-    private $q: ng.IQService;
+    private $http: ng.IHttpService;
     protected __children: Array<IReasyChild>;
     constructor() { 
-        this.$q = ng.injector(['ng']).get('$q');
+        this.$http = ng.injector(['ng']).get('$http');
     }
 
     id(resourceId: any): R {
-        const reasyItem: R = <R>new ReasyItem<T>(resourceId, this.getBaseUrl(), this.$q);
+        const reasyItem: R = <R>new ReasyItem<T>(resourceId, this.getBaseUrl(), this.$http);
         // Create instances of all children
         ng.forEach(this.__children, child => {
             reasyItem[child.provide] = new child.use();
@@ -93,10 +93,12 @@ export abstract class Reasy<T, R extends ReasyItem<T>> implements ReasyTs.IReasy
     }
 
     get(params?: Object): ng.IPromise<Array<T>> {
-        console.group('[GET]');
-        console.log(this.getBaseUrl() + JSON.stringify(params || {}));
-        return this.$q.resolve([<T><any>{many: 'items'}]);
+        return this.$http.get(this.getBaseUrl(), {
+            params: params
+        });
     }
+
+    // TODO: add other methods such as patch, put and delete
 
     protected getBaseUrl() : string{
         throw Error("@BaseUrl annotation not found");

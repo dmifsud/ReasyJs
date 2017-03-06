@@ -1,5 +1,5 @@
 import { ApplianceReasyService } from '../appliances/appliance.reasy.service';
-import { ReasyItem, BaseUrl, Reasy, child } from '../../../lib/services/reasy.service';
+import { ReasyItem, BaseUrl, ReasyService, child } from '../../../lib/services/reasy.service';
 import { RoomModel } from './room.model';
 // ROOM SERVICE ;)
 
@@ -12,7 +12,7 @@ export class RoomReasyServiceItem extends ReasyItem<RoomModel> implements IRoomR
 }
 
 @BaseUrl('room')
-export class RoomReasyService extends Reasy<RoomModel, RoomReasyServiceItem> implements IRoomReasyService {
+export class RoomReasyService extends ReasyService<RoomModel, RoomReasyServiceItem> implements IRoomReasyService {
     @child({
         provide: 'applianceReasyService',
         use: ApplianceReasyService
