@@ -1,5 +1,4 @@
 import * as ng from 'angular';
-import { ReasyJsModuleName } from '../ng-module/reasy.module';
 import { ReasyTs } from '../';
 
 

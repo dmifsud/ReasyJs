@@ -6,6 +6,7 @@ import { HomeModel } from './home.model';
 
 interface IHomeReasyService {
     roomReasyService: RoomReasyService;
+    applianceReasyService: ApplianceReasyService;
 }
 
 class HomeReasyItemService extends ReasyItem<HomeModel> implements IHomeReasyService, IRoomReasyService{

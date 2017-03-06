@@ -1,4 +1,5 @@
 import * as ng from 'angular';
+import { Reasy } from './ng-module/reasy.module';
 
 export declare namespace ReasyTs {
 

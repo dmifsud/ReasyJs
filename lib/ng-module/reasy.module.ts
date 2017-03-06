@@ -1,7 +1,20 @@
 import * as ng from 'angular';
 import { ReasyStoreProvider } from '../services/reasy-store.service';
 
-export const ReasyJsModuleName = 'ng.reasy';
+let reasyModule;
 
-export const ReasyJs = ng.module(ReasyJsModuleName, [])
+export class Reasy {
+    static Name: string = 'ng.reasy'
+
+    static get Module(): ng.IModule {
+        if (reasyModule) {
+            return reasyModule;
+        } else {
+            reasyModule = ng.module(Reasy.name, []);
+            return reasyModule;
+        }
+    }
+}
+
+Reasy.Module
     .provider('reasyStore', ReasyStoreProvider);

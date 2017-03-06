@@ -1,5 +1,4 @@
 import * as ng from 'angular';
-import { ReasyJs, ReasyJsModuleName } from '../ng-module/reasy.module';
 import { ReasyTs } from '../index';
 
 export function BaseUrl(url: string) {
