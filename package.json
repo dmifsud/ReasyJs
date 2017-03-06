@@ -2,7 +2,7 @@
   "name": "reasy-js",
   "version": "0.0.1",
   "description": "To help your api layer rest easy",
-  "main": "index.js",
+  "main": "lib/index.ts",
   "scripts": {
     "test": "npm test",
     "start": "node node_modules/.bin/webpack-dev-server --hot --inline"
