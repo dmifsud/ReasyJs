@@ -1,20 +1,23 @@
-import { BaseUrl, child, ReasyItem, ReasyService } from '../../../core';
+import { BaseUrl, child, ReasyService } from '../../../core';
 
 
 import { ApplianceReasyService } from '../appliances/appliance.reasy.service';
 import { RoomModel } from './room.model';
+import { ReasyDataCollection, ReasyDataItem } from '../../../lib/services/reasy.data.service';
+import { ReasyItem } from '../../../lib/services/reasy.decorators';
 // ROOM SERVICE ;)
 
 export interface IRoomReasyService {
     applianceReasyService: ApplianceReasyService;
 }
 
-export class RoomReasyServiceItem extends ReasyItem<RoomModel> implements IRoomReasyService { 
+export class RoomReasyServiceItem extends ReasyDataItem<RoomModel> implements IRoomReasyService { 
     applianceReasyService: ApplianceReasyService;
 }
 
 @BaseUrl('room')
-export class RoomReasyService extends ReasyService<RoomModel, RoomReasyServiceItem> implements IRoomReasyService {
+@ReasyItem(RoomReasyServiceItem)
+export class RoomReasyService extends ReasyDataCollection<RoomModel, RoomReasyServiceItem> implements IRoomReasyService {
     @child({
         provide: 'applianceReasyService',
         use: ApplianceReasyService

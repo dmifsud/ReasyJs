@@ -1,6 +1,14 @@
 
 export namespace ReasyTs {
 
+    export interface IRestProvider {
+        post(url: string, data: Object);
+        get(url: string, params?: Object);
+        put(url: string, params?: Object);
+        delete(url: string, params?: Object);
+        patch(url: string, params?: Object);
+    }
+
     export interface IData {
         post(data: Object);
         get(params?: Object);
@@ -23,6 +31,12 @@ export namespace ReasyTs {
         patch(params?: Object): TReturn;
     }
 
+    export class IReasyItemService { // TODO: convert to an interface
+        constructor (id: any, url: string, dataProvider: IRestProvider) {};
+    }
+    
+    export interface IReasyService {}
+
     export interface IReasyProvider {
         provide: string;
         use: any;
@@ -33,22 +47,8 @@ export namespace ReasyTs {
         addResources(resources: Array<IReasyProvider>);
     }
 
-    export interface IReasyItem<ResourceType> {
-        get(params?: Object): ng.IPromise<ResourceType>;
-        put(params: Object): ng.IPromise<ResourceType>;
-        delete(params?: Object): ng.IPromise<ResourceType>;
-        patch(params: Object): ng.IPromise<ResourceType>;
-    }
-
-    export interface IReasy {
-        // an id can return a series of functionality
-        // such as:
-        // get(params?) that returns a specific resource
-        // delete(params?) that deletes a specific resource
-        // update(params?) that updates a specific resource
+    export interface IReasy extends IData {
         id(resourceId: any);
-        // this get returns all data based on optional params
-        get(params?: Object);
     }
 
     export interface IReasyChild {

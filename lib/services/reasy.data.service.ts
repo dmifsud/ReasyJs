@@ -1,46 +1,51 @@
 import { ReasyTs } from '../';
 import * as ng from 'angular';
+import { ReasyService, ReasyItemService } from './reasy.service';
 
-export class ReasyDataItem<T> implements ReasyTs.IDataItem<ng.IPromise<T>> {
-    get(): ng.IPromise<T> {
-        return;
+export abstract class ReasyDataItem<T> extends ReasyItemService implements ReasyTs.IDataItem<ng.IPromise<T>> {
+    
+    post(data: Object): ng.IPromise<T> {
+        return this.dataProvider.post(this.baseUrl, data);
     }
 
-    post(): ng.IPromise<T> {
-        return;
+    get(params?: Object): ng.IPromise<T> {
+        console.log(this.baseUrl + ' ' + JSON.stringify(params || {}));
+        return this.dataProvider.get(this.baseUrl, params);
+    }
+    put(params: Object): ng.IPromise<T> {
+        console.log(this.baseUrl + ' ' + JSON.stringify(params || {}));
+        return this.dataProvider.put(this.baseUrl, params);
+    }
+    delete(params?: Object): ng.IPromise<T> {
+        console.log(this.baseUrl + ' ' + JSON.stringify(params || {}));
+        return this.dataProvider.delete(this.baseUrl, params);
+    }
+    patch(params: Object): ng.IPromise<T> {
+        console.log(this.baseUrl + ' ' + JSON.stringify(params || {}));
+        return this.dataProvider.patch(this.baseUrl, params);
     }
 
-    put(): ng.IPromise<T> {
-        return;
-    }
-
-    patch(): ng.IPromise<T> {
-        return;
-    }
-
-    delete(): ng.IPromise<T> {
-        return;
-    }
 }
 
-export class ReasyDataCollection<T> implements ReasyTs.IDataCollection<ng.IPromise<Array<T>>> {
-    get(): ng.IPromise<Array<T>> {
-        return;
+export abstract class ReasyDataCollection<T, R extends ReasyDataItem<T>> extends ReasyService<R, ReasyDataCollection<T, R>> implements ReasyTs.IDataCollection<ng.IPromise<Array<T>>>{
+    
+    get(params?: Object): ng.IPromise<Array<T>> {
+        return this.dataProvider.get(this.getBaseUrl(), params);
     }
 
-    post(): ng.IPromise<Array<T>> {
-        return;
+    post(data: Array<Object>): ng.IPromise<Array<T>> {
+        return this.dataProvider.post(this.getBaseUrl(), data);
     }
 
-    put(): ng.IPromise<Array<T>> {
-        return;
+    put(data: Array<Object>): ng.IPromise<Array<T>> {
+        return this.dataProvider.put(this.getBaseUrl(), data);
     }
 
-    patch(): ng.IPromise<Array<T>> {
-        return;
+    patch(data: Array<Object>): ng.IPromise<Array<T>> {
+        return this.dataProvider.patch(this.getBaseUrl(), data);
     }
 
-    delete(): ng.IPromise<Array<T>> {
-        return;
+    delete(params?: Object): ng.IPromise<Array<T>> {
+        return this.dataProvider.delete(this.getBaseUrl(), params);
     }
 }

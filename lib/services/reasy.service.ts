@@ -1,61 +1,42 @@
 import * as ng from 'angular';
 import { ReasyTs } from '../index';
 
-export class ReasyItem<T> implements ReasyTs.IReasyItem<T> {
+export class ReasyItemService implements ReasyTs.IReasyItemService {
 
-    constructor(private id, private url: string, private $http: ng.IHttpService) { }
+    constructor(private id: any, private url: string, protected dataProvider: ReasyTs.IRestProvider) { }
 
     protected get baseUrl(): string {
         return this.url + this.id;
     }
-    
-    get(params?: Object): ng.IPromise<T> {
-        console.log(this.baseUrl + ' ' + JSON.stringify(params || {}));
-        return this.$http.get(this.baseUrl, params);
-    }
-    put(params: Object): ng.IPromise<T> {
-        console.log(this.baseUrl + ' ' + JSON.stringify(params || {}));
-        return this.$http.put(this.baseUrl, params);
-    }
-    delete(params?: Object): ng.IPromise<T> {
-        console.log(this.baseUrl + ' ' + JSON.stringify(params || {}));
-        return this.$http.delete(this.baseUrl, params);
-    }
-    patch(params: Object): ng.IPromise<T> {
-        console.log(this.baseUrl + ' ' + JSON.stringify(params || {}));
-        return this.$http.patch(this.baseUrl, params);
-    }
 }
 
-export abstract class ReasyService<T, R extends ReasyItem<T>> implements ReasyTs.IReasy {
+export abstract class ReasyService<Item extends ReasyTs.IData, Collection extends ReasyTs.IData> implements ReasyTs.IReasyService {
     // @Injectable
-    private $http: ng.IHttpService;
     protected __children: Array<ReasyTs.IReasyChild>;
+    protected dataProvider: ReasyTs.IRestProvider;
+    private ReasyDataItemRef: { new(id, url: string, dataProvider: ReasyTs.IRestProvider): Item };
     constructor() {
-        this.$http = ng.injector(['ng']).get('$http');
+        this.dataProvider = <ReasyTs.IRestProvider><any>ng.injector(['ng']).get('$http'); // TODO: change to dataProvider
     }
 
-    id(resourceId: any): R {
-        const reasyItem: R = <R>new ReasyItem<T>(resourceId, this.getBaseUrl(), this.$http);
-        // Create instances of all children
-        ng.forEach(this.__children, child => {
-            reasyItem[child.provide] = new child.use();
-            let childUrl = reasyItem[child.provide]['getBaseUrl']();
-            let parentUrl = `${this.getBaseUrl()}${resourceId}`;
-            reasyItem[child.provide]['getBaseUrl'] = function() {
-                return `${parentUrl}${childUrl}`;
-            };
-        });
-        return reasyItem;
+    id(resourceId: any): Item {
+        if (this.ReasyDataItemRef) {
+            const reasyItem: Item = <Item>new this.ReasyDataItemRef(resourceId, this.getBaseUrl(), this.dataProvider);
+            // Create instances of all children
+            ng.forEach(this.__children, child => {
+                reasyItem[child.provide] = new child.use();
+                let childUrl = reasyItem[child.provide]['getBaseUrl']();
+                let parentUrl = `${this.getBaseUrl()}${resourceId}`;
+                reasyItem[child.provide]['getBaseUrl'] = function() {
+                    return `${parentUrl}${childUrl}`;
+                };
+            });
+            return reasyItem;
+        } else {
+            throw Error("@ReasyItem annotation not found");
+        }
+        
     }
-
-    get(params?: Object): ng.IPromise<Array<T>> {
-        return this.$http.get(this.getBaseUrl(), {
-            params: params
-        });
-    }
-
-    // TODO: add other methods such as patch, put and delete
 
     protected getBaseUrl() : string{
         throw Error("@BaseUrl annotation not found");

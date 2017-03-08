@@ -1,8 +1,11 @@
-import { BaseUrl, ReasyItem, ReasyService } from '../../../core';
+import { BaseUrl, ReasyService } from '../../../core';
 
 import { ApplianceModel } from './appliance.model';
+import { ReasyDataItem, ReasyDataCollection } from '../../../lib/services/reasy.data.service';
+import { ReasyItem } from '../../../lib/services/reasy.decorators';
 
-class ApplianceReasyServiceItem extends ReasyItem<ApplianceModel> {}
+class ApplianceReasyServiceItem extends ReasyDataItem<ApplianceModel> {}
 
 @BaseUrl('appliances')
-export class ApplianceReasyService extends ReasyService<ApplianceModel, ApplianceReasyServiceItem> {}
+@ReasyItem(ApplianceReasyServiceItem)
+export class ApplianceReasyService extends ReasyDataCollection<ApplianceModel, ApplianceReasyServiceItem> {}

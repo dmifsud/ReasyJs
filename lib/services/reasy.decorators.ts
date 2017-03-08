@@ -1,6 +1,15 @@
 import { ReasyTs } from '../';
 import * as ng from 'angular';
 
+export function ReasyItem(service: ReasyTs.IReasyItemService) {
+    return function <D extends Function>(Target: D): D {
+        // let Service: { new() : service };
+        
+        Target.prototype.ReasyDataItemRef = service;
+        return Target;
+    }
+}
+
 export function BaseUrl(url: string) {
     return function <TFunction extends Function>(Target: TFunction): TFunction {
         
