@@ -1,7 +1,27 @@
-import * as ng from 'angular';
-import { Reasy } from './ng-module/reasy.module';
 
-export declare namespace ReasyTs {
+export namespace ReasyTs {
+
+    export interface IData {
+        post(data: Object);
+        get(params?: Object);
+        put(params?: Object);
+        delete(params?: Object);
+        patch(params?: Object);
+    }
+
+    export interface IDataItem<TReturn> extends IData {
+        get(params?: Object): TReturn;
+        put(params?: Object): TReturn;
+        delete(params?: Object): TReturn;
+        patch(params?: Object): TReturn;
+    }
+
+    export interface IDataCollection<TReturn> extends IData {
+        get(params?: Object): TReturn;
+        put(params?: Object): TReturn;
+        delete(params?: Object): TReturn;
+        patch(params?: Object): TReturn;
+    }
 
     export interface IReasyProvider {
         provide: string;
@@ -30,4 +50,13 @@ export declare namespace ReasyTs {
         // this get returns all data based on optional params
         get(params?: Object);
     }
+
+    export interface IReasyChild {
+        provide: string;
+        use: { new(): ReasyTs.IReasy };
+    }
+}
+
+interface testInterface {
+    hello: string;
 }

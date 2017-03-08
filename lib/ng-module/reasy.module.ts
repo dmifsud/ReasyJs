@@ -1,6 +1,7 @@
 import * as ng from 'angular';
 import { ReasyStoreProvider } from '../services/reasy-store.service';
 import { ReasyTs } from '../';
+import { ReasyDataCollection } from '../services/reasy.data.service';
 let reasyModule;
 
 export class Reasy {
@@ -18,7 +19,6 @@ export class Reasy {
 
 export function ReasyInjectable(provide: string) {
     return function <TFunction extends Function>(Target: TFunction): TFunction {
-        console.log('actual inject', provide);
         Reasy.Module.service(provide, Target);
         return Target;
     };
@@ -32,4 +32,6 @@ export function ReasyProvide(reasyServices: Array<any>) {
 }
 
 Reasy.Module
-    .provider('reasyStore', ReasyStoreProvider);
+    .provider('reasyStore', ReasyStoreProvider)
+    // ReasyDataService can be overwritten from reasyStore provider
+    .service('ReasyDataService', ReasyDataCollection);

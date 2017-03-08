@@ -13,31 +13,30 @@ class HomeComponentCtrl {
 
     $onInit() {
         this.text = 'Check your logs';
-
-        this.homeReasyService.get()
-            .then(results => {
-            })
-            .catch((err) => {
-                console.error(err.data);
-            });
-
-
-        // this.homeReasyService.id(21).get({optional: 'param'})
-        //     .then(() => {
-        //         this.homeReasyService.get({other: 'options'});
+        // this.homeReasyService.get()
+        //     .then(results => {
         //     })
-        //     .then(() => {
-                
-        //         this.homeReasyService.roomReasyService.id('{roomId}')
-        //             .get({room: 'is in home'});
-        //     })
-        //     .then(() => {
-        //         this.homeReasyService.id(3).roomReasyService.get();
-        //         this.roomReasyService.id(32).get();
+        //     .catch((err) => {
+        //         console.error(err.data);
         //     });
+
+
+        this.homeReasyService.id(21).get({optional: 'param'})
+            .then(() => {
+                this.homeReasyService.get({other: 'options'});
+            })
+            .then(() => {
+                
+                this.homeReasyService.roomReasyService.id('{roomId}')
+                    .get({room: 'is in home'});
+            })
+            .then(() => {
+                this.homeReasyService.id(3).roomReasyService.get();
+                this.roomReasyService.id(32).get();
+            });
         
-        //     // Awesome scenario to GET /home/3/room/34/appliances
-        //     this.homeReasyService.id(3).roomReasyService.id(34).applianceReasyService.get({appliances: 'params'});
+            // Awesome scenario to GET /home/3/room/34/appliances
+            this.homeReasyService.id(3).roomReasyService.id(34).applianceReasyService.get({appliances: 'params'});
 
     }
 }

@@ -1,6 +1,6 @@
 import * as ng from 'angular';
 // Library
-import { Reasy, ReasyProvide } from '../../lib/ng-module/reasy.module';
+import { Reasy, ReasyProvide } from '../../core/angular';
 import { ReasyTs } from '../../lib';
 // Example
 import { HomeReasyService } from './home/home.reasy.service';

@@ -1,7 +1,6 @@
 import * as ng from 'angular';
 import { ReasyTs } from '../';
 
-
 export class ReasyStoreProvider implements ng.IServiceProvider, ReasyTs.IReasyStore {
     public static $inject: string[] = ['$provide'];
 
@@ -14,6 +13,10 @@ export class ReasyStoreProvider implements ng.IServiceProvider, ReasyTs.IReasySt
             ng.forEach(resources, resource => {
                 this.addResource(resource);
             });
+        }
+
+        configureDataService(ReasyDataService: ReasyTs.IData) {
+            this.$provide('ReasyDataService', ReasyDataService);
         }
 
         // TODO: provide an abstract data class that handles the actual data part

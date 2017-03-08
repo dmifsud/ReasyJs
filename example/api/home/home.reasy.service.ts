@@ -1,8 +1,9 @@
+import { BaseUrl, child, ReasyItem, ReasyService } from '../../../core';
+import { ReasyInjectable } from '../../../core/angular';
+
 import { RoomReasyService, IRoomReasyService } from '../room/room.reasy.service';
-import { ReasyItem, ReasyService, BaseUrl, child } from '../../../lib/services/reasy.service';
 import { ApplianceReasyService } from '../appliances/appliance.reasy.service';
 import { HomeModel } from './home.model';
-import { ReasyInjectable } from '../../../lib/ng-module/reasy.module';
 // HOME SERVICE
 
 interface IHomeReasyService {
