@@ -1,4 +1,4 @@
-import * as ng from 'angular';
+import * as angular from 'angular';
 import { ReasyStoreProvider } from '../services/reasy-store.service';
 import { NgReasy } from '../';
 import { ReasyDataProviderService } from '../services/reasy.data.service';
@@ -11,7 +11,9 @@ export class Reasy {
         if (reasyModule) {
             return reasyModule;
         } else {
-            reasyModule = ng.module(Reasy.Name, []);
+            reasyModule = angular.module(Reasy.Name, []);
+            reasyModule.provider('reasyStore', ReasyStoreProvider);
+            reasyModule.service('ReasyDataProviderService', ReasyDataProviderService);    
             return reasyModule;
         }
     }
@@ -19,7 +21,8 @@ export class Reasy {
 
 export function ReasyInjectable(provide: string) {
     return function <TFunction extends Function>(Target: TFunction): TFunction {
-        Reasy.Module.service(provide, Target);
+        // console.log('injectable');
+        // Reasy.Module.service(provide, Target);
         return Target;
     };
 }
@@ -31,7 +34,5 @@ export function ReasyProvide(reasyServices: Array<any>) {
     };
 }
 
-Reasy.Module
-    .provider('reasyStore', ReasyStoreProvider)
     // ReasyDataProviderService can be overwritten from reasyStore provider
-    .service('ReasyDataProviderService', ReasyDataProviderService);
+    

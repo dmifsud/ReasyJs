@@ -4,7 +4,7 @@ import * as ng from 'angular';
 export function ReasyItem(service: NgReasy.IReasyItemService) {
     return function <D extends Function>(Target: D): D {
         // let Service: { new() : service };
-        
+        console.log('ReasyDataItemRef');
         Target.prototype.ReasyDataItemRef = service;
         return Target;
     }
@@ -32,13 +32,22 @@ export function BaseUrl(url: string) {
 export function child(child: NgReasy.IReasyChild) {
     return function <T extends NgReasy.IReasyItemService>(Target: T, propertyName: string) {
         
-        const reasyChild = new child.use();
-        reasyChild['getParent'] = function() {
-            return Target;
+        Target['__initializeChild'] = function(dataProvider) {
+            
+            if (ng.isArray(Target['__children'])) {
+                ng.forEach(Target['__children'], function(aChild: NgReasy.IReasyChild) {
+                    const reasyChild = new aChild.use(dataProvider);
+                    console.log(reasyChild);
+                    reasyChild['getParent'] = function() {
+                        return Target;
+                    };
+                    // Include it as an instantiated property within the parent 
+                    Target[aChild.provide] = reasyChild;
+                });
+            }
+            
         };
-
-        // Include it as an instantiated property within the parent 
-        Target[child.provide] = reasyChild;
+        
         // Also keep a reference to all children
         if (ng.isArray(Target['__children'])) {
             (<Array<NgReasy.IReasyChild>>Target['__children']).push(child);

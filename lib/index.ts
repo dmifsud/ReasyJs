@@ -44,6 +44,7 @@ export namespace NgReasy {
     export interface IReasyStore {
         addResource(resource: IReasyProvider);
         addResources(resources: Array<IReasyProvider>);
+        configureDataService(ReasyDataService: { new(): NgReasy.IRestProvider });
     }
 
     export interface IReasy extends IData {
@@ -52,7 +53,7 @@ export namespace NgReasy {
 
     export interface IReasyChild {
         provide: string;
-        use: { new(): IDataCollection<any> };
+        use: { new(dataProvider: IRestProvider): IDataCollection<any> };
     }
 }
 
