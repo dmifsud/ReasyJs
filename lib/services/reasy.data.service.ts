@@ -2,6 +2,32 @@ import { NgReasy } from '../';
 import * as ng from 'angular';
 import { ReasyService, ReasyItemService } from './reasy.service';
 
+export class ReasyDataProviderService implements NgReasy.IRestProvider {
+
+    public static $inject: string[] = ['$http'];
+    constructor(private $http: ng.IHttpService) { }
+
+    post(url: string, data: any) {
+        return this.$http.post(url, data);
+    }
+    
+    get(url: string, params?: any) {
+        return this.$http.get(url, params);
+    }
+
+    put(url: string, params?: any) {
+        return this.$http.put(url, params);
+    }
+
+    delete(url: string, params?: any) {
+        return this.$http.delete(url, params);
+    }
+
+    patch(url: string, params?: any) {
+        return this.$http.patch(url, params);
+    }
+}
+
 export abstract class ReasyDataItem<T> extends ReasyItemService implements NgReasy.IDataItem<ng.IPromise<T>> {
     
     get(params?: Object): ng.IPromise<T> {

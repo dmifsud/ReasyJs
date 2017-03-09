@@ -30,7 +30,7 @@ export function BaseUrl(url: string) {
 
 
 export function child(child: NgReasy.IReasyChild) {
-    return function <T extends NgReasy.IReasy>(Target: T, propertyName: string) {
+    return function <T extends NgReasy.IReasyItemService>(Target: T, propertyName: string) {
         
         const reasyChild = new child.use();
         reasyChild['getParent'] = function() {

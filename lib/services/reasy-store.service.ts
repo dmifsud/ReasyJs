@@ -15,8 +15,8 @@ export class ReasyStoreProvider implements ng.IServiceProvider, NgReasy.IReasySt
             });
         }
 
-        configureDataService(ReasyDataService: NgReasy.IData) {
-            this.$provide('ReasyDataService', ReasyDataService);
+        configureDataService(ReasyDataService: NgReasy.IRestProvider) {
+            this.$provide('ReasyDataProviderService', ReasyDataService);
         }
 
         // TODO: provide an abstract data class that handles the actual data part

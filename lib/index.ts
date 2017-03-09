@@ -2,11 +2,11 @@
 export namespace NgReasy {
 
     export interface IRestProvider {
-        post(url: string, data: Object);
-        get(url: string, params?: Object);
-        put(url: string, params?: Object);
-        delete(url: string, params?: Object);
-        patch(url: string, params?: Object);
+        post(url: string, data: any);
+        get(url: string, params?: any);
+        put(url: string, params?: any);
+        delete(url: string, params?: any);
+        patch(url: string, params?: any);
     }
 
     export interface IData {
@@ -52,7 +52,7 @@ export namespace NgReasy {
 
     export interface IReasyChild {
         provide: string;
-        use: { new(): NgReasy.IReasy };
+        use: { new(): IDataCollection<any> };
     }
 }
 

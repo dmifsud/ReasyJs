@@ -14,6 +14,10 @@ interface IHomeReasyService {
 class HomeReasyItemService extends ReasyDataItem<HomeModel> implements IHomeReasyService, IRoomReasyService{
     roomReasyService: RoomReasyService;
     applianceReasyService: ApplianceReasyService;
+
+    furnishHome() {
+        return 'Home is already furnished';
+    }
 }
 
 
