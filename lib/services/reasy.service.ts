@@ -19,7 +19,6 @@ export abstract class ReasyService<Item extends NgReasy.IData, Collection extend
     constructor(protected dataProvider: NgReasy.IRestProvider) {
         // this.dataProvider = <NgReasy.IRestProvider><any>ng.injector(['ng', Reasy.Module.name]).get('ReasyDataProviderService');
         if (this.__initializeChild) {
-            console.log('initializing child', this);
             this.__initializeChild(dataProvider);
         }
     }

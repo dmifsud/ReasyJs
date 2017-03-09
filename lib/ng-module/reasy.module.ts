@@ -21,7 +21,6 @@ export class Reasy {
 
 export function ReasyInjectable(provide: string) {
     return function <TFunction extends Function>(Target: TFunction): TFunction {
-        // console.log('injectable');
         // Reasy.Module.service(provide, Target);
         return Target;
     };

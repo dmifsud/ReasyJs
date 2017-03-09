@@ -1,5 +1,5 @@
 import { BaseUrl, child, ReasyDataCollection, ReasyDataItem, ReasyItem } from '../../../core';
-import { ReasyInjectable } from '../../../core/angular';
+// import { ReasyInjectable } from '../../../core/angular';
 
 import { RoomReasyService, IRoomReasyService } from '../room/room.reasy.service';
 import { ApplianceReasyService } from '../appliances/appliance.reasy.service';
@@ -20,10 +20,10 @@ class HomeReasyItemService extends ReasyDataItem<HomeModel> implements IHomeReas
     }
 }
 
+// @ReasyInjectable('homeReasyService')
 
 @BaseUrl('homes')
 @ReasyItem(HomeReasyItemService)
-@ReasyInjectable('homeReasyService')
 export class HomeReasyService extends ReasyDataCollection<HomeModel, HomeReasyItemService> implements IHomeReasyService, IRoomReasyService {
 
     @child({

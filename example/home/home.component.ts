@@ -20,19 +20,23 @@ class HomeComponentCtrl {
         //         console.error(err.data);
         //     });
 
-        this.homeReasyService.id(21).get({optional: 'param'})
-            .then(() => {
-                this.homeReasyService.get({other: 'options'});
-            })
-            .then(() => {
+        // this.homeReasyService.id(2).roomReasyService.id(3).get();
+
+        this.homeReasyService.roomReasyService.id(3).applianceReasyService.get();
+
+        // this.homeReasyService.id(21).get({optional: 'param'})
+        //     .then(() => {
+        //         this.homeReasyService.get({other: 'options'});
+        //     })
+        //     .then(() => {
                 
-                this.homeReasyService.roomReasyService.id('{roomId}')
-                    .get({room: 'is in home'});
-            })
-            .then(() => {
-                this.homeReasyService.id(3).roomReasyService.get();
-                this.roomReasyService.id(32).get();
-            });
+        //         this.homeReasyService.roomReasyService.id('{roomId}')
+        //             .get({room: 'is in home'});
+        //     })
+        //     .then(() => {
+        //         this.homeReasyService.id(3).roomReasyService.get();
+        //         this.roomReasyService.id(32).get();
+        //     });
         
             // Awesome scenario to GET /home/3/room/34/appliances
             this.homeReasyService.id(3).roomReasyService.id(34).applianceReasyService.get({appliances: 'params'});

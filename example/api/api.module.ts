@@ -43,20 +43,46 @@ import { RoomReasyService } from './room/room.reasy.service';
 
 */
 
-@ReasyProvide([
-    HomeReasyService
-])
-class MainClass {
+// @ReasyProvide([
+//     HomeReasyService
+// ])
+// class MainClass {
 
+// }
+
+class CustomApiService implements NgReasy.IRestProvider {
+
+    post(url: string, data: any) {
+        return;
+    }
+    
+    get(url: string, params?: any) {
+        return;
+    }
+
+    put(url: string, params?: any) {
+        return;
+    }
+
+    delete(url: string, params?: any) {
+        return;
+    }
+
+    patch(url: string, params?: any) {
+        return;
+    }
 }
-
 export const ApiModule = ng.module('api.module', [Reasy.Module.name])
     .config(function(reasyStoreProvider: NgReasy.IReasyStore) {
         // resyStoreProvider marks the following as injectable
+        console.log('configuring custom api service');
+        // reasyStoreProvider.configureDataService(CustomApiService);
+
         reasyStoreProvider.addResources([
-            // { provide: 'homeReasyService', use: HomeReasyService },
+            { provide: 'homeReasyService', use: HomeReasyService },
             { provide: 'roomReasyService', use: RoomReasyService },
             { provide: 'applianceReasyService', use: ApplianceReasyService }
         ]);
+
     });
     
