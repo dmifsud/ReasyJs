@@ -42,7 +42,7 @@ module.exports = {
 
   plugins: [
     new HtmlWebpackPlugin({
-      body: 'ReasyTs',
+      body: 'NgReasy',
       entry: 'app/index.ejs', // Load a custom template (ejs by default but can be changed)
       fileName: 'index.html',
       template: 'index.ejs',

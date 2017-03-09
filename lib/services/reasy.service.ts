@@ -1,22 +1,22 @@
 import * as ng from 'angular';
-import { ReasyTs } from '../index';
+import { NgReasy } from '../index';
 
-export class ReasyItemService implements ReasyTs.IReasyItemService {
+export class ReasyItemService implements NgReasy.IReasyItemService {
 
-    constructor(private id: any, private url: string, protected dataProvider: ReasyTs.IRestProvider) { }
+    constructor(private id: any, private url: string, protected dataProvider: NgReasy.IRestProvider) { }
 
     protected get baseUrl(): string {
         return this.url + this.id;
     }
 }
 
-export abstract class ReasyService<Item extends ReasyTs.IData, Collection extends ReasyTs.IData> implements ReasyTs.IReasyService {
+export abstract class ReasyService<Item extends NgReasy.IData, Collection extends NgReasy.IData> implements NgReasy.IReasyService {
     // @Injectable
-    protected __children: Array<ReasyTs.IReasyChild>;
-    protected dataProvider: ReasyTs.IRestProvider;
-    private ReasyDataItemRef: { new(id, url: string, dataProvider: ReasyTs.IRestProvider): Item };
+    protected __children: Array<NgReasy.IReasyChild>;
+    protected dataProvider: NgReasy.IRestProvider;
+    private ReasyDataItemRef: { new(id, url: string, dataProvider: NgReasy.IRestProvider): Item };
     constructor() {
-        this.dataProvider = <ReasyTs.IRestProvider><any>ng.injector(['ng']).get('$http'); // TODO: change to dataProvider
+        this.dataProvider = <NgReasy.IRestProvider><any>ng.injector(['ng']).get('$http'); // TODO: change to dataProvider
     }
 
     id(resourceId: any): Item {

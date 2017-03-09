@@ -1,7 +1,7 @@
-import { ReasyTs } from '../';
+import { NgReasy } from '../';
 import * as ng from 'angular';
 
-export function ReasyItem(service: ReasyTs.IReasyItemService) {
+export function ReasyItem(service: NgReasy.IReasyItemService) {
     return function <D extends Function>(Target: D): D {
         // let Service: { new() : service };
         
@@ -29,8 +29,8 @@ export function BaseUrl(url: string) {
 }
 
 
-export function child(child: ReasyTs.IReasyChild) {
-    return function <T extends ReasyTs.IReasy>(Target: T, propertyName: string) {
+export function child(child: NgReasy.IReasyChild) {
+    return function <T extends NgReasy.IReasy>(Target: T, propertyName: string) {
         
         const reasyChild = new child.use();
         reasyChild['getParent'] = function() {
@@ -41,7 +41,7 @@ export function child(child: ReasyTs.IReasyChild) {
         Target[child.provide] = reasyChild;
         // Also keep a reference to all children
         if (ng.isArray(Target['__children'])) {
-            (<Array<ReasyTs.IReasyChild>>Target['__children']).push(child);
+            (<Array<NgReasy.IReasyChild>>Target['__children']).push(child);
         } else {
             Target['__children'] = [child];
         }

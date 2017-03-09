@@ -19,7 +19,9 @@ class HomeComponentCtrl {
         //     .catch((err) => {
         //         console.error(err.data);
         //     });
-this.applianceReasyService.id(3).get();
+
+        
+
         this.homeReasyService.id(21).get({optional: 'param'})
             .then(() => {
                 this.homeReasyService.get({other: 'options'});

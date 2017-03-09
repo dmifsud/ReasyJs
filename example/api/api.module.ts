@@ -1,7 +1,7 @@
 import * as ng from 'angular';
 // Library
 import { Reasy, ReasyProvide } from '../../core/angular';
-import { ReasyTs } from '../../lib';
+import { NgReasy } from '../../lib';
 // Example
 import { HomeReasyService } from './home/home.reasy.service';
 import { ApplianceReasyService } from './appliances/appliance.reasy.service';
@@ -16,7 +16,7 @@ import { RoomReasyService } from './room/room.reasy.service';
 
     2)  Reasy Store Provider
         =====================
-        yourNgModuleReference.config(function(reasyStoreProvider: ReasyTs.IReasyStore) {
+        yourNgModuleReference.config(function(reasyStoreProvider: NgReasy.IReasyStore) {
             reasyStoreProvider.addResources([
                 { provide: 'yourReasyService', use: YourReasyService }
             ]);
@@ -51,7 +51,7 @@ class MainClass {
 }
 
 export const ApiModule = ng.module('api.module', [Reasy.Module.name])
-    .config(function(reasyStoreProvider: ReasyTs.IReasyStore) {
+    .config(function(reasyStoreProvider: NgReasy.IReasyStore) {
         // resyStoreProvider marks the following as injectable
         reasyStoreProvider.addResources([
             // { provide: 'homeReasyService', use: HomeReasyService },

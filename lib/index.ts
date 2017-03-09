@@ -1,5 +1,5 @@
 
-export namespace ReasyTs {
+export namespace NgReasy {
 
     export interface IRestProvider {
         post(url: string, data: Object);
@@ -10,7 +10,6 @@ export namespace ReasyTs {
     }
 
     export interface IData {
-        post(data: Object);
         get(params?: Object);
         put(params?: Object);
         delete(params?: Object);
@@ -53,7 +52,7 @@ export namespace ReasyTs {
 
     export interface IReasyChild {
         provide: string;
-        use: { new(): ReasyTs.IReasy };
+        use: { new(): NgReasy.IReasy };
     }
 }
 

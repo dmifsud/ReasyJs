@@ -1,13 +1,9 @@
-import { ReasyTs } from '../';
+import { NgReasy } from '../';
 import * as ng from 'angular';
 import { ReasyService, ReasyItemService } from './reasy.service';
 
-export abstract class ReasyDataItem<T> extends ReasyItemService implements ReasyTs.IDataItem<ng.IPromise<T>> {
+export abstract class ReasyDataItem<T> extends ReasyItemService implements NgReasy.IDataItem<ng.IPromise<T>> {
     
-    post(data: Object): ng.IPromise<T> {
-        return this.dataProvider.post(this.baseUrl, data);
-    }
-
     get(params?: Object): ng.IPromise<T> {
         console.log(this.baseUrl + ' ' + JSON.stringify(params || {}));
         return this.dataProvider.get(this.baseUrl, params);
@@ -27,7 +23,7 @@ export abstract class ReasyDataItem<T> extends ReasyItemService implements Reasy
 
 }
 
-export abstract class ReasyDataCollection<T, R extends ReasyDataItem<T>> extends ReasyService<R, ReasyDataCollection<T, R>> implements ReasyTs.IDataCollection<ng.IPromise<Array<T>>>{
+export abstract class ReasyDataCollection<T, R extends ReasyDataItem<T>> extends ReasyService<R, ReasyDataCollection<T, R>> implements NgReasy.IDataCollection<ng.IPromise<Array<T>>>{
     
     get(params?: Object): ng.IPromise<Array<T>> {
         return this.dataProvider.get(this.getBaseUrl(), params);

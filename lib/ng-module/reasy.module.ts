@@ -1,6 +1,6 @@
 import * as ng from 'angular';
 import { ReasyStoreProvider } from '../services/reasy-store.service';
-import { ReasyTs } from '../';
+import { NgReasy } from '../';
 import { ReasyDataCollection } from '../services/reasy.data.service';
 let reasyModule;
 

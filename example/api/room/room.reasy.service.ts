@@ -1,10 +1,8 @@
-import { BaseUrl, child, ReasyService } from '../../../core';
+import { BaseUrl, child, ReasyItem, ReasyDataCollection, ReasyDataItem } from '../../../core';
 
 
 import { ApplianceReasyService } from '../appliances/appliance.reasy.service';
 import { RoomModel } from './room.model';
-import { ReasyDataCollection, ReasyDataItem } from '../../../lib/services/reasy.data.service';
-import { ReasyItem } from '../../../lib/services/reasy.decorators';
 // ROOM SERVICE ;)
 
 export interface IRoomReasyService {

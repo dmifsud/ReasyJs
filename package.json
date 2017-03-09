@@ -1,6 +1,6 @@
 {
   "name": "reasy-js",
-  "version": "0.0.1",
+  "version": "1.0.0-alpha.1",
   "description": "To help your api layer rest easy",
   "main": "index.ts",
   "scripts": {
