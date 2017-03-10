@@ -11,15 +11,15 @@ export class ReasyItemService implements NgReasy.IReasyItemService {
 }
 
 export abstract class ReasyService<Item extends NgReasy.IData, Collection extends NgReasy.IData> implements NgReasy.IReasyService {
-    public static $inject: string[] = ['ReasyDataProviderService'];
+    public static $inject: string[] = ['ReasyDataProviderService', '$injector'];
     protected __children: Array<NgReasy.IReasyChild>;
     private __initializeChild: Function;
     // protected dataProvider: NgReasy.IRestProvider;
     private ReasyDataItemRef: { new(id, url: string, dataProvider: NgReasy.IRestProvider): Item };
-    constructor(protected dataProvider: NgReasy.IRestProvider) {
+    constructor(protected dataProvider: NgReasy.IRestProvider, protected $injector) {
         // this.dataProvider = <NgReasy.IRestProvider><any>ng.injector(['ng', Reasy.Module.name]).get('ReasyDataProviderService');
         if (this.__initializeChild) {
-            this.__initializeChild(dataProvider);
+            this.__initializeChild(dataProvider, $injector);
         }
     }
 
@@ -28,7 +28,8 @@ export abstract class ReasyService<Item extends NgReasy.IData, Collection extend
             const reasyItem: Item = <Item>new this.ReasyDataItemRef(resourceId, this.getBaseUrl(), this.dataProvider);
             // Create instances of all children
             ng.forEach(this.__children, child => {
-                reasyItem[child.provide] = new child.use(this.dataProvider);
+                // reasyItem[child.provide] = this.$injector.get(child.provide); // new child.use(this.dataProvider, this.$inject);
+                reasyItem[child.provide] = new child.use(this.dataProvider, this.$injector);
                 let childUrl = reasyItem[child.provide]['getBaseUrl']();
                 let parentUrl = `${this.getBaseUrl()}${resourceId}`;
                 reasyItem[child.provide]['getBaseUrl'] = function() {

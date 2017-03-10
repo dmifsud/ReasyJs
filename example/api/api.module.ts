@@ -57,6 +57,7 @@ class CustomApiService implements NgReasy.IRestProvider {
     }
     
     get(url: string, params?: any) {
+        console.log('Getting from ma class', url, params);
         return;
     }
 
@@ -75,7 +76,7 @@ class CustomApiService implements NgReasy.IRestProvider {
 export const ApiModule = ng.module('api.module', [Reasy.Module.name])
     .config(function(reasyStoreProvider: NgReasy.IReasyStore) {
         // resyStoreProvider marks the following as injectable
-        console.log('configuring custom api service');
+        // console.log('configuring custom api service');
         // reasyStoreProvider.configureDataService(CustomApiService);
 
         reasyStoreProvider.addResources([

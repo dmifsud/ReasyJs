@@ -53,7 +53,7 @@ export namespace NgReasy {
 
     export interface IReasyChild {
         provide: string;
-        use: { new(dataProvider: IRestProvider): IDataCollection<any> };
+        use: { new(dataProvider: IRestProvider, $injector): IDataCollection<any> };
     }
 }
 

@@ -16,6 +16,15 @@ export class RoomReasyServiceItem extends ReasyDataItem<RoomModel> implements IR
 @BaseUrl('room')
 @ReasyItem(RoomReasyServiceItem)
 export class RoomReasyService extends ReasyDataCollection<RoomModel, RoomReasyServiceItem> implements IRoomReasyService {
+    
+    testClass() {
+        // Showing off custom methods
+        let $timeout: ng.ITimeoutService = this.$injector.get('$timeout');
+        $timeout(function() {
+            console.log('it works');
+        }, 1000);
+    }
+    
     @child({
         provide: 'applianceReasyService',
         use: ApplianceReasyService
