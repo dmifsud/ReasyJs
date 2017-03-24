@@ -24,8 +24,7 @@ class HomeComponentCtrl {
         // the problem lies with the initialize children - happening in constructor
         // this.homeReasyService.roomReasyService.applianceReasyService.get();
         // this.homeReasyService.id(4).roomReasyService.applianceReasyService.get();
-        this.homeReasyService.roomReasyService.id(3).applianceReasyService.get();
-
+        //this.homeReasyService.roomReasyService.id(3).applianceReasyService.get();
         // this.homeReasyService.id(21).get({optional: 'param'})
         //     .then(() => {
         //         this.homeReasyService.get({other: 'options'});
