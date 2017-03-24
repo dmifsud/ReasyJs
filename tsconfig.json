@@ -30,6 +30,7 @@
   },
   "compileOnSave": false,
   "files": [
-    "example/app.module.ts"
+    "example/app.module.ts",
+    "tests/reasy.data.service.spec.ts"
   ]
 }
