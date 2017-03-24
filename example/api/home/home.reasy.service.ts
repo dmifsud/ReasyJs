@@ -1,5 +1,5 @@
-import { BaseUrl, child, ReasyItem, ReasyService } from '../../../core';
-import { ReasyInjectable } from '../../../core/angular';
+import { BaseUrl, child, ReasyDataCollection, ReasyDataItem, ReasyItem } from '../../../core';
+// import { ReasyInjectable } from '../../../core/angular';
 
 import { RoomReasyService, IRoomReasyService } from '../room/room.reasy.service';
 import { ApplianceReasyService } from '../appliances/appliance.reasy.service';
@@ -11,15 +11,20 @@ interface IHomeReasyService {
     applianceReasyService: ApplianceReasyService;
 }
 
-class HomeReasyItemService extends ReasyItem<HomeModel> implements IHomeReasyService, IRoomReasyService{
+class HomeReasyItemService extends ReasyDataItem<HomeModel> implements IHomeReasyService, IRoomReasyService{
     roomReasyService: RoomReasyService;
     applianceReasyService: ApplianceReasyService;
+
+    furnishHome() {
+        return 'Home is already furnished';
+    }
 }
 
+// @ReasyInjectable('homeReasyService')
 
 @BaseUrl('homes')
-@ReasyInjectable('homeReasyService')
-export class HomeReasyService extends ReasyService<HomeModel, HomeReasyItemService> implements IHomeReasyService, IRoomReasyService {
+@ReasyItem(HomeReasyItemService)
+export class HomeReasyService extends ReasyDataCollection<HomeModel, HomeReasyItemService> implements IHomeReasyService, IRoomReasyService {
 
     @child({
         provide: 'roomReasyService',

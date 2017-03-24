@@ -1,46 +1,75 @@
-import { ReasyTs } from '../';
+import { NgReasy } from '../';
 import * as ng from 'angular';
+import { ReasyService, ReasyItemService } from './reasy.service';
 
-export class ReasyDataItem<T> implements ReasyTs.IDataItem<ng.IPromise<T>> {
-    get(): ng.IPromise<T> {
-        return;
+export class ReasyDataProviderService implements NgReasy.IRestProvider {
+
+    public static $inject: string[] = ['$http'];
+    constructor(private $http: ng.IHttpService) { }
+
+    post(url: string, data: any) {
+        return this.$http.post(url, data);
+    }
+    
+    get(url: string, params?: any) {
+        return this.$http.get(url, {
+            params: params
+        }).then((res: ng.IHttpPromiseCallbackArg<any>) => res.data);
     }
 
-    post(): ng.IPromise<T> {
-        return;
+    put(url: string, params?: any) {
+        return this.$http.put(url, params);
     }
 
-    put(): ng.IPromise<T> {
-        return;
+    delete(url: string, params?: any) {
+        return this.$http.delete(url, params);
     }
 
-    patch(): ng.IPromise<T> {
-        return;
-    }
-
-    delete(): ng.IPromise<T> {
-        return;
+    patch(url: string, params?: any) {
+        return this.$http.patch(url, params);
     }
 }
 
-export class ReasyDataCollection<T> implements ReasyTs.IDataCollection<ng.IPromise<Array<T>>> {
-    get(): ng.IPromise<Array<T>> {
-        return;
+export abstract class ReasyDataItem<T> extends ReasyItemService implements NgReasy.IDataItem<ng.IPromise<T>> {
+    
+    get(params?: Object): ng.IPromise<T> {
+        console.log(this.baseUrl + ' ' + JSON.stringify(params || {}));
+        return this.dataProvider.get(this.baseUrl, params);
+    }
+    put(params: Object): ng.IPromise<T> {
+        console.log(this.baseUrl + ' ' + JSON.stringify(params || {}));
+        return this.dataProvider.put(this.baseUrl, params);
+    }
+    delete(params?: Object): ng.IPromise<T> {
+        console.log(this.baseUrl + ' ' + JSON.stringify(params || {}));
+        return this.dataProvider.delete(this.baseUrl, params);
+    }
+    patch(params: Object): ng.IPromise<T> {
+        console.log(this.baseUrl + ' ' + JSON.stringify(params || {}));
+        return this.dataProvider.patch(this.baseUrl, params);
     }
 
-    post(): ng.IPromise<Array<T>> {
-        return;
+}
+
+export abstract class ReasyDataCollection<T, R extends ReasyDataItem<T>> extends ReasyService<R, ReasyDataCollection<T, R>> implements NgReasy.IDataCollection<ng.IPromise<Array<T>>>{
+    
+    get(params?: Object): ng.IPromise<Array<T>> {
+        return this.dataProvider.get(this.getBaseUrl(), params);
     }
 
-    put(): ng.IPromise<Array<T>> {
-        return;
+    post(data: Array<Object>): ng.IPromise<Array<T>> {
+        return this.dataProvider.post(this.getBaseUrl(), data);
     }
 
-    patch(): ng.IPromise<Array<T>> {
-        return;
+    put(data: Array<Object>): ng.IPromise<Array<T>> {
+        return this.dataProvider.put(this.getBaseUrl(), data);
     }
 
-    delete(): ng.IPromise<Array<T>> {
-        return;
+    patch(data: Array<Object>): ng.IPromise<Array<T>> {
+        return this.dataProvider.patch(this.getBaseUrl(), data);
+    }
+
+    delete(params?: Object): ng.IPromise<Array<T>> {
+        return this.dataProvider.delete(this.getBaseUrl(), params);
     }
 }

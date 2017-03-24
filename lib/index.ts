@@ -1,8 +1,15 @@
 
-export namespace ReasyTs {
+export namespace NgReasy {
+
+    export interface IRestProvider {
+        post(url: string, data: any);
+        get(url: string, params?: any);
+        put(url: string, params?: any);
+        delete(url: string, params?: any);
+        patch(url: string, params?: any);
+    }
 
     export interface IData {
-        post(data: Object);
         get(params?: Object);
         put(params?: Object);
         delete(params?: Object);
@@ -23,6 +30,12 @@ export namespace ReasyTs {
         patch(params?: Object): TReturn;
     }
 
+    export class IReasyItemService { // TODO: convert to an interface
+        constructor (id: any, url: string, dataProvider: IRestProvider) {};
+    }
+    
+    export interface IReasyService {}
+
     export interface IReasyProvider {
         provide: string;
         use: any;
@@ -31,29 +44,16 @@ export namespace ReasyTs {
     export interface IReasyStore {
         addResource(resource: IReasyProvider);
         addResources(resources: Array<IReasyProvider>);
+        configureDataService(ReasyDataService: { new(): NgReasy.IRestProvider });
     }
 
-    export interface IReasyItem<ResourceType> {
-        get(params?: Object): ng.IPromise<ResourceType>;
-        put(params: Object): ng.IPromise<ResourceType>;
-        delete(params?: Object): ng.IPromise<ResourceType>;
-        patch(params: Object): ng.IPromise<ResourceType>;
-    }
-
-    export interface IReasy {
-        // an id can return a series of functionality
-        // such as:
-        // get(params?) that returns a specific resource
-        // delete(params?) that deletes a specific resource
-        // update(params?) that updates a specific resource
+    export interface IReasy extends IData {
         id(resourceId: any);
-        // this get returns all data based on optional params
-        get(params?: Object);
     }
 
     export interface IReasyChild {
         provide: string;
-        use: { new(): ReasyTs.IReasy };
+        use: { new(dataProvider: IRestProvider, $injector): IDataCollection<any> };
     }
 }
 
