@@ -12,7 +12,9 @@ export class ReasyDataProviderService implements NgReasy.IRestProvider {
     }
     
     get(url: string, params?: any) {
-        return this.$http.get(url, params);
+        return this.$http.get(url, {
+            params: params
+        }).then((res: ng.IHttpPromiseCallbackArg<any>) => res.data);
     }
 
     put(url: string, params?: any) {

@@ -20,7 +20,6 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
-      'tests/test-main.ts',
       {pattern: 'tests/*.spec.ts', included: true}
     ],
 
@@ -60,8 +59,7 @@ module.exports = function(config) {
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
       // Run this through webpack, and enable inline sourcemaps
-      'tests/test-main.ts': ['webpack'],
-      'tests/*.spec.ts': ['webpack'],
+      'tests/*.spec.ts': ['webpack']
     },
 
 
