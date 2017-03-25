@@ -137,11 +137,42 @@ describe('Simple entity', () => {
                     $httpBackend.flush();
                 });
                 
-            })
+                
+            });
 
+            describe('FAIL', () => {
+                it('should GET entity item with params and fail', () => {
+                    const mockParams = {what: 'the'};
+                    $httpBackend.expectGET('/mock-entity/not-a-real-id?what=the').respond(500, {message: 'fail'});
+                    entityReasyService.id('not-a-real-id').get(mockParams)
+                        .catch((reason: ng.IHttpPromiseCallbackArg<any>) => {
+                            expect(reason.status).toBe(500);
+                            expect(reason.data).toEqual({message: 'fail'});
+                        });
+                    $httpBackend.flush();
+                });
+            });
             
         });
 
+
+        describe('PUT', () => {
+            it('should PUT a list of mock data to entity', () => {
+                $httpBackend.expectPUT('/mock-entity/', [{ updated: 'data' }]).respond(200, entityMockList);
+                entityReasyService.put([{updated: 'data'}]).then(results => {
+                    expect(results).toEqual(entityMockList);
+                });
+                $httpBackend.flush();
+            });
+
+            it('should PUT mock data to entity', () => {
+                $httpBackend.expectPUT('/mock-entity/id', { updated: 'data'}).respond(200, entityMockItem);
+                entityReasyService.id('id').put({ updated: 'data' }).then(result => {
+                    expect(result).toEqual(entityMockItem);
+                });
+                $httpBackend.flush();
+            });
+        });
             
     });
 
