@@ -1,6 +1,6 @@
 {
   "name": "reasy-js",
-  "version": "1.0.0-alpha.5",
+  "version": "1.0.0-alpha.6",
   "description": "To help your api layer rest easy",
   "main": "lib/reasy.min.js",
   "typings": "lib/src/index.d.ts",
