@@ -2,8 +2,13 @@
   "name": "reasy-js",
   "version": "1.0.0-alpha.1",
   "description": "To help your api layer rest easy",
-  "main": "index.ts",
+  "main": "lib/reasy.min.js",
+  "typings": "lib/index",
+  "files": [
+    "lib/"
+  ],
   "scripts": {
+    "prepublish": "node node_modules/.bin/webpack --debug; node node_modules/.bin/webpack -p",
     "test": "node ./node_modules/karma/bin/karma start --single-run",
     "start": "node node_modules/.bin/webpack-dev-server --hot --inline"
   },

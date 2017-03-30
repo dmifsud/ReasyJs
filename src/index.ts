@@ -1,3 +1,9 @@
+export * from './services/reasy-store.service';
+export * from './services/reasy.data.service';
+export * from './services/reasy.decorators';
+export * from './services/reasy.service';
+export * from './ng-module/reasy.module';
+
 
 export namespace NgReasy {
 

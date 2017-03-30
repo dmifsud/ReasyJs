@@ -2,6 +2,7 @@
   "compilerOptions": {
     "target": "es5",
     "module": "commonjs",
+    "declaration": true,
     "moduleResolution": "node",
     "sourceMap": true,
     "emitDecoratorMetadata": true,
@@ -12,14 +13,8 @@
       "dom"
     ],
     "noImplicitAny": false,
-    "outDir": "build"
+    "outDir": "lib/"
   },
-  "filesGlob": [
-    "src/app/**/*.ts",
-    "typings/index.d.ts",
-    "!node_modules/**/*.ts",
-    "tests/*.spec.ts"
-  ],
   "exclude": [
     "node_modules",
     "typings/main",
@@ -30,7 +25,7 @@
   },
   "compileOnSave": false,
   "files": [
-    "example/app.module.ts",
+    "./src/index.ts",
     "tests/reasy.data.service.spec.ts"
   ]
 }
