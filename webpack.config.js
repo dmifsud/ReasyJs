@@ -1,18 +1,19 @@
 var HtmlWebpackPlugin = require('html-webpack-plugin');
+var webpack = require('webpack');
 
 module.exports = {
-  context: __dirname + '/example',
+  context: __dirname + '/src',
   entry: {
-      app: './app.module.ts'
+      'reasy.min' : './index.ts'
   },
   output: {
     filename: '[name].js',
-    path: __dirname + '/dist'
+    path: __dirname + '/lib'
   },
 
   devServer: {
     port: 5000,
-    contentBase: __dirname + '/build'
+    contentBase: __dirname + '/lib'
   },
 
   resolve: {
@@ -41,12 +42,24 @@ module.exports = {
   },
 
   plugins: [
-    new HtmlWebpackPlugin({
-      body: 'NgReasy',
-      entry: 'app/index.ejs', // Load a custom template (ejs by default but can be changed)
-      fileName: 'index.html',
-      template: 'index.ejs',
-      hash: true
+    new webpack.optimize.UglifyJsPlugin({
+      comments: false,
+      compress: { warnings: false, drop_console: true },
+      minimize: false,
+      output: {comments: false},
+      mangle: false,
+      sourceMap: true,
+      screwIe8: true
     })
   ]
+
+  // plugins: [
+  //   new HtmlWebpackPlugin({
+  //     body: 'NgReasy',
+  //     entry: 'app/index.ejs', // Load a custom template (ejs by default but can be changed)
+  //     fileName: 'index.html',
+  //     template: 'index.ejs',
+  //     hash: true
+  //   })
+  // ]
 };

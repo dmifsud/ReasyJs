@@ -18,15 +18,19 @@ export class ReasyDataProviderService implements NgReasy.IRestProvider {
     }
 
     put(url: string, params?: any) {
-        return this.$http.put(url, params);
+        return this.$http.put(url, params).then((res: ng.IHttpPromiseCallbackArg<any>) => res.data);
     }
 
     delete(url: string, params?: any) {
-        return this.$http.delete(url, params);
+        return this.$http.delete(url, {
+            params: params
+        }).then((res: ng.IHttpPromiseCallbackArg<any>) => res.data);
     }
 
     patch(url: string, params?: any) {
-        return this.$http.patch(url, params);
+        return this.$http.patch(url, {
+            params: params
+        }).then((res: ng.IHttpPromiseCallbackArg<any>) => res.data);
     }
 }
 

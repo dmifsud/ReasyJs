@@ -1,3 +1,3 @@
-export * from '../lib/services/reasy.decorators';
-export * from '../lib/services/reasy.data.service';
-export * from '../lib';
+export * from '../src/services/reasy.decorators';
+export * from '../src/services/reasy.data.service';
+export * from '../src';

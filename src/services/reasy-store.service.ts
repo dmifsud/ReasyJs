@@ -20,6 +20,7 @@ export class ReasyStoreProvider implements ng.IServiceProvider, NgReasy.IReasySt
         // TODO: provide an abstract data class that handles the actual data part
         // by default it will use a default Reasy abstract class that uses $http
 
-    $get = class ReasyStore {
+    $get = function() {
+
     }
 }
