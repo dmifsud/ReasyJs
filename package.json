@@ -8,7 +8,7 @@
     "lib/"
   ],
   "scripts": {
-    "prepublish": "node node_modules/.bin/webpack --debug; node node_modules/.bin/webpack -p",
+    "prepublish": "node node_modules/.bin/webpack --debug",
     "test": "node ./node_modules/karma/bin/karma start --single-run",
     "start": "node node_modules/.bin/webpack-dev-server --hot --inline"
   },

@@ -1,5 +1,8 @@
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var webpack = require('webpack');
+var plugins = [];
+
+
 
 module.exports = {
   context: __dirname + '/src',
@@ -8,9 +11,11 @@ module.exports = {
   },
   output: {
     filename: '[name].js',
+    library: 'reasy',
+    libraryTarget: 'commonjs',
     path: __dirname + '/lib'
   },
-
+  devtool: 'source-map',
   devServer: {
     port: 5000,
     contentBase: __dirname + '/lib'
