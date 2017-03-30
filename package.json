@@ -3,7 +3,7 @@
   "version": "1.0.0-alpha.3",
   "description": "To help your api layer rest easy",
   "main": "lib/reasy.min.js",
-  "typings": "lib/index",
+  "typings": "lib/src/index.d.ts",
   "files": [
     "lib/"
   ],
