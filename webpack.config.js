@@ -11,8 +11,8 @@ module.exports = {
   },
   output: {
     filename: '[name].js',
-    library: 'reasy',
-    libraryTarget: 'commonjs',
+    libraryTarget: 'umd',
+    umdNamedDefine: true,
     path: __dirname + '/lib'
   },
   devtool: 'source-map',
