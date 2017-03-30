@@ -1,7 +1,6 @@
 import * as ng from 'angular';
 import 'angular-mocks';
-import { BaseUrl, ReasyItem , ReasyDataItem, ReasyDataCollection, NgReasy, child } from '../core';
-import { ReasyStoreProvider, Reasy } from '../core/angular';
+import { NgReasy, BaseUrl, ReasyItem, child, ReasyDataCollection, ReasyDataItem, Reasy } from '../src/';
 
 describe('init', () => {
     it('should have angular available', () => {
