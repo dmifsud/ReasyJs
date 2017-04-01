@@ -2,4 +2,7 @@
 TS library to help your api interfaces rest easy.
 
 
-experimentalDecorators: true
+
+## Do not use in production. 
+
+Project is still in experimental and alpha stage.
